@@ -49,7 +49,7 @@ public class Item {
         this.cost = cost;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "itemGroup_id", nullable = false)
     public ItemGroup getItemGroup() {
         return itemGroup;
@@ -59,7 +59,7 @@ public class Item {
         this.itemGroup = itemGroup;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne()
     @JoinColumn(name = "box_id")
     public Box getBox() {
         return box;

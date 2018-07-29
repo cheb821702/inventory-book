@@ -48,4 +48,13 @@ public class Box {
     public void setExpedition(Expedition expedition) {
         this.expedition = expedition;
     }
+
+    @PrePersist
+    @PreUpdate
+    public void updateAssociations() {
+        if(this.items != null)
+            for(Item items : this.items) {
+                items.setBox(this);
+            }
+    }
 }

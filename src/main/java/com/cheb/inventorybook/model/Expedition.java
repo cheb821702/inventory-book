@@ -38,4 +38,13 @@ public class Expedition {
     public void setBoxes(List<Box> boxes) {
         this.boxes = boxes;
     }
+
+    @PrePersist
+    @PreUpdate
+    public void updateAssociations() {
+        if(this.boxes != null)
+            for(Box box : this.boxes) {
+                box.setExpedition(this);
+            }
+    }
 }

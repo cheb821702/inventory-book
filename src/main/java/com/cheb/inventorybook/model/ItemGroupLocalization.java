@@ -3,7 +3,7 @@ package com.cheb.inventorybook.model;
 import javax.persistence.*;
 
 @Entity
-public class ItemLocalization {
+public class ItemGroupLocalization {
 
     private Long id;
     private String languageIso;

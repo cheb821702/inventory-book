@@ -42,8 +42,9 @@ public class Department {
     @PrePersist
     @PreUpdate
     public void updateDepartmentLocalization() {
-        for(DepartmentLocalization localization : this.localizations) {
-            localization.setDepartment(this);
-        }
+        if(this.localizations != null)
+            for(DepartmentLocalization localization : this.localizations) {
+                localization.setDepartment(this);
+            }
     }
 }

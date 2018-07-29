@@ -1,5 +1,6 @@
 package com.cheb.inventorybook.exception.handlers;
 
+import com.cheb.inventorybook.exception.InventoryBookValidationException;
 import org.springframework.data.rest.core.RepositoryConstraintViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,14 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
                 .stream()
                 .map(ObjectError::toString)
                 .collect(Collectors.joining("\n"));
+        return new ResponseEntity<>(errors, new HttpHeaders(), HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @ExceptionHandler({ InventoryBookValidationException.class })
+    public ResponseEntity<Object> handleRepositoryValidationException(Exception ex, WebRequest request) {
+        InventoryBookValidationException nevEx = (InventoryBookValidationException) ex;
+
+        String errors = nevEx.getLocalizedMessage();
         return new ResponseEntity<>(errors, new HttpHeaders(), HttpStatus.NOT_ACCEPTABLE);
     }
 }
